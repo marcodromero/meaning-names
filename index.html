@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
+  <title>Etimología de nombres</title>
+</head>
+<body>
+  <div class="app nes-container is-centered">
+    <header>
+      <h2 class="title ">Etimología de nombres</h2>
+    </header>
+    
+    
+    <section class="search">
+      <div class="nes-field">
+        <input type="text" id="input-name" class="nes-input " placeholder="nombre">
+      </div>
+      <div class="checkbox-contain">
+        <label class="lbl-checkbox">
+          <input type="checkbox" class="nes-checkbox" id="checkbox-man" checked/>
+          <span>H</span>
+        </label>
+        <label class="lbl-checkbox">
+          <input type="checkbox" class="nes-checkbox" id="checkbox-woman" checked/>
+          <span>M</span>
+        </label>
+      </div>
+    </section>  
+    
+
+      <section id="names-list">
+          <div class="nes-balloon from-left">
+            <p>¡Hola! Escribe en el buscador un nombre. Puedes filtrar los resultados por género.</p>
+          </div>      
+      </section>
+  
+
+    <article class="nes-container ">
+ 
+      <h3 id="meaning-name">Info</h3>
+      <p id="meaning">Luego de hacer una búsqueda presiona sobre algún nombre de la lista para ver aquí su significado.
+      </p>
+    </article>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
