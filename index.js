@@ -1,5 +1,9 @@
 const supabaseClient = supabase.createClient('https://znymgdnbgpigsheevxtc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpueW1nZG5iZ3BpZ3NoZWV2eHRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4MjA0MDYsImV4cCI6MjA1ODM5NjQwNn0.kIYM6W2b9UrUNrcSLM4yLKiPLDsQYJMXynPUgXryGXE');
 
+let isFetchError = false;
+let names = [];
+let genderChoosed = 'all';
+
 async function fetchData(req) {
   const { searchedName, genderChoosed = null } = req.query;
   let query = supabaseClient.from('names').select();
@@ -12,17 +16,14 @@ async function fetchData(req) {
                                           .order('name', { ascending: true });
 
   if (error) {
-      console.error("Error fetching data:", error);
+    isFetchError = true;
   }else {
-  
+    isFetchError = false;
      return names;
   }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  let names = [];
-  let genderChoosed = 'all';
 
   const addResultsToNameList = (arrayNames)=>{
     const namesList = document.getElementById("names-list");
@@ -72,8 +73,21 @@ async function fetchData(req) {
   inputSearch.addEventListener("input", (e)=> {
     if(!isInputEmpty()){
       searchName().then((result)=>{
-      result.length > 0 && (names = result);
-      addResultsToNameList(result);
+        if(!isFetchError){
+          result.length > 0 && (names = result);
+          addResultsToNameList(result);
+        }else{
+          const namesList = document.getElementById("names-list");
+          namesList.innerHTML = '';
+          const nesBallon = document.createElement("div");
+          nesBallon.className = "nes-balloon from-left";
+          const nesBallonTextContain = document.createElement("p");
+          const nesBallonText = document.createTextNode("La base de datos no está disponible en este momento.");
+          nesBallonTextContain.appendChild(nesBallonText);
+          nesBallon.appendChild(nesBallonTextContain);
+          namesList.appendChild(nesBallon);
+        }
+        
     })
     }
     });
@@ -98,11 +112,11 @@ async function fetchData(req) {
 
   const isInputEmpty = ()=>{
     const searchedName = document.getElementById("input-name").value.toLowerCase().trim();
-    console.log(searchedName.length, "largo");
+    
     if(searchedName.length > 0 ){
       return false;
     }else{
-      console.log("vaciando");
+    
       const namesList = document.getElementById("names-list");
       namesList.innerHTML = '';
       const nesBallon = document.createElement("div");
@@ -122,8 +136,11 @@ async function fetchData(req) {
      setGenderChoosed();
      if(!isInputEmpty()){
        searchName().then((result)=>{
-      result.length > 0 && (names = result);
-      addResultsToNameList(result);
+         if(!isFetchError){
+          result.length > 0 && (names = result);
+          addResultsToNameList(result);
+         }
+      
       })
     }
   })
@@ -133,8 +150,11 @@ async function fetchData(req) {
      setGenderChoosed();
      if(!isInputEmpty()){
        searchName().then((result)=>{
-      result.length > 0 && (names = result);
-      addResultsToNameList(result);
+        if(!isFetchError){
+          result.length > 0 && (names = result);
+          addResultsToNameList(result);
+        }
+      
       })
     }
   })
