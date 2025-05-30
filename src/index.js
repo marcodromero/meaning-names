@@ -1,5 +1,4 @@
-const supabaseClient = supabase.createClient('https://znymgdnbgpigsheevxtc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpueW1nZG5iZ3BpZ3NoZWV2eHRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4MjA0MDYsImV4cCI6MjA1ODM5NjQwNn0.kIYM6W2b9UrUNrcSLM4yLKiPLDsQYJMXynPUgXryGXE');
-
+const supabaseClient = supabase.createClient(import.meta.env.VITE_SUPABASE_PROJECT_URL, import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY);
 
 const UI_MESSAGES = {
   noMatches: "No hubo coincidencias.",
